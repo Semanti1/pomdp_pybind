@@ -4,7 +4,7 @@ Makefile
 cmake_install.cmake
 
 
-
+__pycache__/
 *.so
 *.so*
 

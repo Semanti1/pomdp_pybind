@@ -171,11 +171,13 @@ def belief_update(agent, real_action, real_observation, next_robot_state, planne
                                                                   # The agent knows the objects are static.
                                                                   objid != agent.robot_id, next_robot_state)
                                                                   #oargs={"next_robot_state": next_robot_state})
+                #print(new_belief)
             else:
                 raise ValueError("Unexpected program state."\
                                  "Are you using the appropriate belief representation?")
 
-            agent.cur_belief().set_object_belief(objid, new_belief)
+            #agent.cur_belief().set_object_belief(objid, new_belief)
+            planner.getAgent().cur_belief().set_object_belief(objid, new_belief)
 
 
 ### Solve the problem with POUCT/POMCP planner ###
@@ -208,7 +210,7 @@ def solve(problem,
                                  exploration_const=exploration_const,
                                  rollout_policy=problem.agent.getPolicyModel())'''  # Random by default
 
-        planner = POUCT(3,1,4096,0.95,1000,0,0,problem.agent.getPolicyModel(),True,5,problem.agent)
+        planner = POUCT(10,1,4096,0.99,1000,0,0,problem.agent.getPolicyModel(),True,5,problem.agent)
     elif isinstance(random_object_belief, pomdp_py.Particles):
         # Use POMCP
         planner = pomdp_py.POMCP(max_depth=max_depth,
@@ -253,11 +255,17 @@ def solve(problem,
         #real_observation = problem.env.provide_observation(problem.agent.getObsModel(), real_action)
         real_observation = problem.agent.getObsModel().sample(problem.env.getstate(), real_action)
         # Updates
-        #problem.agent.clear_history()  # truncate history
+        problem.agent.clear_history()  # truncate history
         problem.agent.update_hist(real_action, real_observation)
+
+        #planner.getAgent().update_hist(real_action, real_observation)
+        #planner.update(real_action, real_observation)
+
         belief_update(problem.agent, real_action, real_observation,
                       problem.env.getstate().object_states[robot_id],
                       planner)
+
+
         _time_used += time.time() - _start
 
         # Info and render
@@ -305,7 +313,7 @@ def solve(problem,
 # Test
 def unittest():
     # random world
-    grid_map, robot_char = random_world(4, 4, 8, 5)
+    grid_map, robot_char = random_world(10, 10, 5, 10)
     laserstr = make_laser_sensor(90, (1, 4), 0.5, False)
     proxstr = make_proximity_sensor(4, False)
     problem = MosOOPOMDP(robot_char,  # r is the robot character

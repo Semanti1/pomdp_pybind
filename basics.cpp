@@ -135,7 +135,7 @@ History Agent::gethistory()
 }*/
 void Agent::update_hist(std::shared_ptr<Action> act, std::shared_ptr<Observation> obs)
 {
-	cout << "action " << act.get()->name << " obs " << obs->name;
+	//cout << "action " << act.get()->name << " obs " << obs->name;
 	//Action* a = act.get();
 	//hist->history.push_back(act);
 	hist.add(act,obs);

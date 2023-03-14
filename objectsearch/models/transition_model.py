@@ -67,7 +67,7 @@ class StaticObjectTransitionModel(TransitionModel):
     def argmax(self, state, action):
         """Returns the most likely next object_state"""
         #return copy.deepcopy(state.object_states[self._objid])
-        return state.object_states[self._objid]
+        return state.object_states[self._objid].deepcopy()
 
     
 class RobotTransitionModel(TransitionModel):
@@ -127,11 +127,16 @@ class RobotTransitionModel(TransitionModel):
             robot_state = state
         else:
             robot_state = state.object_states[self._robot_id]
-
-        #next_robot_state = copy.deepcopy(robot_state)
-        next_robot_state = robot_state
+        #print ("robot state", robot_state['camera_direction'])
+        next_robot_state = robot_state.deepcopy()
+        
+        #next_robot_state = robot_state
+        #print ("next robot state", next_robot_state)
         # camera direction is only not None when looking        
         next_robot_state['camera_direction'] = None 
+        #print ("next robot state", next_robot_state['camera_direction'])
+        #next_robot_state['hello']=1
+        #print(next_robot_state['camera_direction'],robot_state['camera_direction'])
         if isinstance(action, MotionAction):
             # motion action
             next_robot_state['pose'] = \
@@ -154,6 +159,9 @@ class RobotTransitionModel(TransitionModel):
                                            and z.objposes[objid] != ObjectObservation.NULL)}
             next_robot_state["objects_found"] = tuple(set(next_robot_state['objects_found'])\
                                                       | set(observed_target_objects))
+
+        #print ("next robot state", next_robot_state['camera_direction'])
+        #print ("robot state again", robot_state['camera_direction'])
         return next_robot_state
     
     def sample(self, state, action):

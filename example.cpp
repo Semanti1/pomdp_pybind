@@ -237,18 +237,30 @@ PYBIND11_MODULE(example, m)
         .def_readwrite("name", &State::name);*/
 
     
-    py::class_<State, PyState, std::shared_ptr<State>> state(m, "State", py::dynamic_attr());
+    py::class_<State, PyState, std::shared_ptr<State>> state(m, "State");
     state
         .def(py::init<string>())
         .def(py::init<>())
-        .def("__copy__", [](const State& self) {
-        return State(self);
-            })
-        .def("__deepcopy__", [](const State& self, py::dict) {
-                return State(self);
-            },"memo" )
+
         .def("getname", &State::getname)
         .def_readwrite("name", &State::name);
+        /*.def(py::pickle(
+            [](const State& st) { // __getstate__
+                
+                return st.getname();
+            },
+            [](str t) { // __setstate__
+                
+
+                
+                Pickleable p(t);
+
+              
+                
+
+                return p;
+            }
+            ));*/
 
     py::class_<Belief, PyBelief, std::shared_ptr<Belief>> belief_model(m, "Belief");
     belief_model

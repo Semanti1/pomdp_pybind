@@ -191,7 +191,7 @@ if __name__ == "__main__":
 
     print("\n ** Testing Tiger problem")
     #print("\n** Testing obj search **")
-    #unittest()
+    unittest()
     print("\n** Testing POUCT **")
     st1 = TigerState("tiger-left")
     st2 = TigerState("tiger-right")

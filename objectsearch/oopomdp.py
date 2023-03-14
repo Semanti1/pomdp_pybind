@@ -43,7 +43,9 @@ class ObjectState(State):
             return False
         return self.objclass == other.objclass\
             and self.attributes == other.attributes
-
+    def deepcopy(self):
+        newcopy = ObjectState(self.objclass, self.attributes)
+        return newcopy
     def __getitem__(self, attr):
         """__getitem__(self, attr)
         Returns the attribute"""

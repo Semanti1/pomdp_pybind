@@ -82,7 +82,7 @@ tuple<std::shared_ptr<Action>, double, int> POUCT::_search()
 	bool stop_by_sims = _num_sims > 0 ? true : false;
 	start_time = std::chrono::system_clock::now();
 	History hist = _agent->gethistory();
-	cout << "history before " << hist.history.size() << endl;
+	//cout << "history before " << hist.history.size() << endl;
 	//int historyDepth = hist.history.size();
 	while (true)
 	{
@@ -105,7 +105,7 @@ tuple<std::shared_ptr<Action>, double, int> POUCT::_search()
 		}
 		//hist.history.resize(historyDepth);
 	}
-	cout << "history after " << hist.history.size() << endl;
+	//cout << "history after " << hist.history.size() << endl;
 	//cout << "OUT OF WHILE LOOP" << endl;
 	//cout << dynamic_cast<RootVNode*>(tree)->num_visits << endl;
 	//std::unordered_map<std::shared_ptr<Action>, std::shared_ptr<QNode>> a = tree->children;
