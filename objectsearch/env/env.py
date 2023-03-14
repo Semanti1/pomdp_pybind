@@ -67,7 +67,7 @@ class MosEnvironment(Environment):
         assert robot_id is not None, "state transition should happen for a specific robot"
 
         #next_state = copy.deepcopy(self.getstate())
-        next_state = self.getstate().deepcopy()
+        next_state = self.getstate() #.deepcopy()
         next_state.object_states[robot_id] =\
             self.transitionmodel()[robot_id].sample(self.getstate(), action)
         

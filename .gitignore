@@ -5,6 +5,15 @@ cmake_install.cmake
 
 
 __pycache__/
+./objectsearch/agent/__pycache__
+./objectsearch/domain/__pycache__
+./objectsearch/env/__pycache__
+./objectsearch/models/components/__pycache__
+./objectsearch/models/__pycache__
+./objectsearch/__pycache__
+./tigerprob/__pycache__
+*.py[cod]
+*$py.class
 *.so
 *.so*
 

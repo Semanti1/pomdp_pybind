@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\objectsearch",
+    "\\objectsearch\\agent",
+    "\\objectsearch\\domain",
+    "\\objectsearch\\env",
+    "\\objectsearch\\models",
+    "\\pybind11",
+    "\\pybind11\\include",
+    "\\tigerprob"
+  ],
+  "SelectedNode": "\\pybind11",
+  "PreviewInSolutionExplorer": false
+}

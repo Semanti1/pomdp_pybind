@@ -211,7 +211,7 @@ if __name__ == "__main__":
     print(init_belief.getitem(st1))
     
     #act = ActionPrior
-    pouct = POUCT(3,1,4096,0.95,50,0,0,P,True,5,agent)
+    pouct = POUCT(10,1,4096,0.95,50,0,0,P,True,5,agent)
     #print(init_belief.getitem(TigerState("tiger-left")))
 
     #h = agent.gethistory()

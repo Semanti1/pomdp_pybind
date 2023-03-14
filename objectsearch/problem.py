@@ -164,7 +164,7 @@ def belief_update(agent, real_action, real_observation, next_robot_state, planne
                     # observation model from O(oi|s',a) to O(label_i|s',a) and
                     # it becomes easy to define O(label_i=i|s',a) and O(label_i=FREE|s',a).
                     # These ideas are used in my recent 3D object search work.
-                    new_belief = belief_obj.update_hist_belief(real_action,
+                    new_belief = agent.cur_belief().object_belief(objid).update_hist_belief(real_action,
                                                                   real_observation.for_obj(objid),
                                                                   agent.getObsModel()[objid],
                                                                   agent.getTransModel()[objid],True,
@@ -247,9 +247,10 @@ def solve(problem,
             break  # no more time to update.
 
         # Execute action
+        print ("before", problem.env.getstate())
         reward = problem.env.state_transition(real_action, execute=True,
                                               robot_id=robot_id)
-
+        print ("after", problem.env.getstate())
         # Receive observation
         _start = time.time()
         #real_observation = problem.env.provide_observation(problem.agent.getObsModel(), real_action)
@@ -313,7 +314,7 @@ def solve(problem,
 # Test
 def unittest():
     # random world
-    grid_map, robot_char = random_world(10, 10, 5, 10)
+    grid_map, robot_char = random_world(10, 10,5,10)
     laserstr = make_laser_sensor(90, (1, 4), 0.5, False)
     proxstr = make_proximity_sensor(4, False)
     problem = MosOOPOMDP(robot_char,  # r is the robot character
