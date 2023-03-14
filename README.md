@@ -1,4 +1,4 @@
-To build:
+To build and run:
 
 cmake -S .
 
